@@ -56,6 +56,12 @@
             </form>
             <script>
                 $(document).ready(function() {
+                    // Generate a simple captcha
+                    function randomNumber(min, max) {
+                        return Math.floor(Math.random() * (max - min + 1) + min);
+                    }
+                    $('#captchaOperation').html([randomNumber(1, 12), '+', randomNumber(1, 12), '='].join(' '));
+
                     $('#contactForm').bootstrapValidator({
                         container: '#messages',
                         feedbackIcons: {
@@ -100,7 +106,7 @@
                             captcha: {
                                 validators: {
                                     callback: {
-                                        message: 'Wrong answer',
+                                        message: 'Введите правильный ответ',
                                         callback: function(value, validator, $field) {
                                             var items = $('#captchaOperation').html().split(' '), sum = parseInt(items[0]) + parseInt(items[2]);
                                             return value == sum;
@@ -121,18 +127,7 @@
                     });
                 });
             </script>
-            <!--  СКРИПТ ДЛЯ КАПЧИ -->
-            <script>
-                $(document).ready(function() {
-                    // Generate a simple captcha
-                    function randomNumber(min, max) {
-                        return Math.floor(Math.random() * (max - min + 1) + min);
-                    }
-                    $('#captchaOperation').html([randomNumber(1, 12), '+', randomNumber(1, 12), '='].join(' '));
 
-                    $('#basicBootstrapForm').formValidation();
-                });
-            </script>
         </div>
         </div><!-- col -->
     </div><!-- row -->
