@@ -4,14 +4,14 @@ $link = mysqli_connect("localhost","admin","","user_dv")  or die("Не могу 
 mysqli_select_db($link,"user_dv");
 if(isset($_POST['submit']))
 {
-    $errorMessage = "";
-    
-    if(trim($_POST['firstname']) == '') {
+    $errorMessage = "Что то пошло не так... скорее всего данные введены неверно";
+
+    if(trim($_POST['fullName']) == '') {
             $hasError = true;
         } else {
-        $firstname = trim(strip_tags($_POST['firstname']));
+        $firstname = trim(strip_tags($_POST['fullName']));
         }
-    if(trim($_POST['gender']) == ''){
+    if(trim($_POST['gender']) == '0'){
         $hasError = true;
     }else{
         $gender = trim(strip_tags($_POST['gender']));
@@ -34,5 +34,3 @@ if(isset($_POST['submit']))
         mysqli_query($link,$insertToDb) or die(mysqli_error($link));
     }
 }
-header("Location: ../all_ok.html");
-exit();
